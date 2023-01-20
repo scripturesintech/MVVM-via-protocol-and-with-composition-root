@@ -20,6 +20,15 @@ class ViewModel {
     init(networkProtocol: NetworkProtocol) {
         self.networkProtocol = networkProtocol
     }
+    
+    /// loopingIn function
+    func loopingIn() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
+            guard let self = self else { return }
+            self.fetchQuote()
+            self.loopingIn()
+        }
+    }
 
     func fetchQuote() {
         let url = URL(string: "https://api.kanye.rest/")!

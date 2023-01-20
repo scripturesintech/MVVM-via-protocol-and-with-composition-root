@@ -29,19 +29,11 @@ class ViewController: UIViewController {
         self.view.addGestureRecognizer(tapGesture)
         tapGesture.addTarget(self, action: #selector(fetchQuote))
         
-        loopingIn()
+        self.viewModel.loopingIn()
         
         self.viewModel.output = self
     }
     
-    /// loopingIn function
-    func loopingIn() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
-            guard let self = self else { return }
-            self.fetchQuote()
-            self.loopingIn()
-        }
-    }
     
     /// fetchQuote
     @objc func fetchQuote() {
